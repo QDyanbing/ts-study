@@ -149,3 +149,68 @@ function log1<T extends Length>(value: T): T {
   console.log(value.length);
   return value;
 }
+
+interface Foo {
+  bar: number;
+}
+
+let foo = {} as Foo;
+foo.bar = 1;
+
+let a: string = "sss";
+a = null;
+
+enum Type {
+  Java,
+  JavaScript,
+}
+class Java {
+  sayJava() {
+    console.log("Java");
+  }
+  java: string;
+}
+class JavaScript {
+  sayJavaScript() {
+    console.log("JavaScript");
+  }
+  javaScript: string;
+}
+
+function getLanguage(type: Type) {
+  const lang = type === Type.Java ? new Java() : new JavaScript();
+  if (lang instanceof Java) {
+    lang.sayJava();
+  } else {
+    lang.sayJavaScript();
+  }
+}
+
+function getLanguage2(type: Type) {
+  const lang = type === Type.Java ? new Java() : new JavaScript();
+  if ("java" in lang) {
+    lang.sayJava();
+  } else {
+    lang.sayJavaScript();
+  }
+}
+
+function typeOfTest(x: string | number) {
+  if (typeof x === "string") {
+    x.length;
+  } else {
+    x.toFixed(2);
+  }
+}
+
+function isJava(lang: Java | JavaScript): lang is Java {
+  return (lang as Java).sayJava !== undefined;
+}
+function getLanguage3(type: Type) {
+  const lang = type === Type.Java ? new Java() : new JavaScript();
+  if (isJava(lang)) {
+    lang.sayJava();
+  } else {
+    lang.sayJavaScript();
+  }
+}
