@@ -1,216 +1,66 @@
-// const str: string = "a";
-// const bum: number = 1;
-// const boo: boolean = true;
-// const symbol: symbol = Symbol();
-// const un: undefined = undefined;
-// const nu: null = null;
-
-// const tuple: [number, string] = [1, "a"];
-
-// const add = (x: number): number => x;
-
-// const obj: { x: string } = { x: "a" };
-
-// const noReturn = (): void => {};
-// const all: any = 123;
-
-// const arr: Array<number | string> = [1];
-
-// enum Status {
-//   waiting,
-//   success,
+// interface Dog1 {
+//   run(): void;
 // }
 
-// enum Message {
-//   hello = "hello word",
+// interface Dog2 {
+//   eat(): void;
 // }
 
-// enum Answer {
-//   N,
-//   Y = "yes",
+// const Dog: Dog1 & Dog2 = {
+//   run() {},
+//   eat() {},
+// };
+
+// let a: string | number = 1;
+
+// interface Square {
+//   kind: "square";
+//   size: number;
 // }
 
-// interface List {
-//   id: number;
-//   name: string;
+// interface Rectangle {
+//   kind: "rectangle";
+//   width: number;
+//   height: number;
 // }
 
-const obj = { id: 1, name: "A" } as List;
-
-interface List {
-  [x: string]: any;
-  id: number;
-  name: string;
-}
-
-interface Add {
-  (x: number): number;
-}
-
-interface Lib {
-  version: number;
-  (x: number): number;
-}
-
-function add1(x: number): number {
-  return x;
-}
-
-let add2: (x: number) => number;
-
-type add3 = (x: number) => number;
-
-interface add4 {
-  (x: number): number;
-}
-
-// class Dog {
-//   constructor(name: string) {
-//     this.name = name;
-//   }
-//   name: string;
+// interface Circle {
+//   kind: "circle";
+//   r: number;
 // }
 
-// class BigDog extends Dog {
-//   constructor(name: string, color: string) {
-//     super(name);
-//     this.color = color;
-//   }
-//   color: string;
-// }
+// type Shape = Square | Rectangle | Circle;
 
-// abstract class Animal {
-//   abstract eat(): void;
-// }
-
-// class Dog extends Animal {
-//   eat() {
-//     console.log("肉");
+// function getSize(s: Shape) {
+//   switch (s.kind) {
+//     case "square":
+//       return s.size * s.size;
+//     case "rectangle":
+//       return s.width * s.height;
+//     default:
+//       return ((e:never)=>{throw new Error(e)})(s);
 //   }
 // }
 
-// class Cat extends Animal {
-//   eat() {
-//     console.log("鱼");
-//   }
+// const obj = { a: 1, b: 2 };
+// function getValue<T, K extends keyof T>(obj: T, keys: K[]): T[K][] {
+//   return keys.map((item) => obj[item]);
 // }
 
-// class Work {
-//   step1() {
-//     return this;
-//   }
+// console.log(getValue(obj, ["a", "b"])); //[1,2]
+// console.log(getValue(obj, ["c", "d"])); //[undefined,undefined]
 
-//   step2() {
-//     return this;
-//   }
+// interface Obj {
+//   a: number;
+//   b: number;
 // }
 
-interface Animal {
-  name: string;
+// const key: keyof Obj = "a";
+
+interface Obj {
+  x: string;
+  y: string;
 }
+// type ReadonlyObj = Readonly<Obj>;
 
-class Animals implements Animal {
-  constructor(name: string) {
-    this.name = name;
-  }
-  name: string;
-}
-
-class Auto {
-  state: 1;
-}
-
-interface AutoInterface extends Auto {}
-
-// function log<T>(value: T): T {
-//   return value;
-
-// type log2 =<T>(value:T)=>T
-
-// interface Log {
-//   <T>(value: T): T;
-// }
-
-// interface Log<T> {
-//   (value: T): T;
-// }
-
-class Cat<T> {
-  run(value: T) {
-    return value;
-  }
-}
-
-interface Length {
-  length: number;
-}
-
-function log1<T extends Length>(value: T): T {
-  console.log(value.length);
-  return value;
-}
-
-interface Foo {
-  bar: number;
-}
-
-let foo = {} as Foo;
-foo.bar = 1;
-
-let a: string = "sss";
-a = null;
-
-enum Type {
-  Java,
-  JavaScript,
-}
-class Java {
-  sayJava() {
-    console.log("Java");
-  }
-  java: string;
-}
-class JavaScript {
-  sayJavaScript() {
-    console.log("JavaScript");
-  }
-  javaScript: string;
-}
-
-function getLanguage(type: Type) {
-  const lang = type === Type.Java ? new Java() : new JavaScript();
-  if (lang instanceof Java) {
-    lang.sayJava();
-  } else {
-    lang.sayJavaScript();
-  }
-}
-
-function getLanguage2(type: Type) {
-  const lang = type === Type.Java ? new Java() : new JavaScript();
-  if ("java" in lang) {
-    lang.sayJava();
-  } else {
-    lang.sayJavaScript();
-  }
-}
-
-function typeOfTest(x: string | number) {
-  if (typeof x === "string") {
-    x.length;
-  } else {
-    x.toFixed(2);
-  }
-}
-
-function isJava(lang: Java | JavaScript): lang is Java {
-  return (lang as Java).sayJava !== undefined;
-}
-function getLanguage3(type: Type) {
-  const lang = type === Type.Java ? new Java() : new JavaScript();
-  if (isJava(lang)) {
-    lang.sayJava();
-  } else {
-    lang.sayJavaScript();
-  }
-}
+// type parObj = Partial<Obj>
