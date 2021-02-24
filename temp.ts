@@ -57,10 +57,16 @@
 
 // const key: keyof Obj = "a";
 
-interface Obj {
-  x: string;
-  y: string;
-}
+// interface Obj {
+//   x: string;
+//   y: string;
+// }
 // type ReadonlyObj = Readonly<Obj>;
 
 // type parObj = Partial<Obj>
+
+type TypeName<T> = T extends string
+  ? "string"
+  : T extends number
+  ? "number"
+  : "undefined";
