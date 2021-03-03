@@ -65,8 +65,30 @@
 
 // type parObj = Partial<Obj>
 
-type TypeName<T> = T extends string
-  ? "string"
-  : T extends number
-  ? "number"
-  : "undefined";
+// type TypeName<T> = T extends string
+//   ? "string"
+//   : T extends number
+//   ? "number"
+//   : "undefined";
+
+// // a.ts
+// namespace Shape {
+//   export function say() {}
+// }
+
+// // b.ts
+// namespace Shape {
+//   export function eat() {}
+// }
+
+interface A {
+  x: string;
+}
+interface A {
+  y: string;
+}
+
+const a: A = {
+  x: "123",
+  y: "23",
+};
